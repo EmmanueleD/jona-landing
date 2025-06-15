@@ -10,11 +10,13 @@ import {
   FaComments,
   FaMapMarkerAlt,
   FaPhone,
-  FaSpinner
+  FaSpinner,
+  FaSync
 } from "react-icons/fa";
 import { getAllLandingPageData } from "@/lib/api";
 import { LandingPageData } from "@/types/supabase";
 import { useAuth } from "@/components/auth/AuthContext";
+import RevalidateButton from "@/components/admin/RevalidateButton";
 
 export default function AdminPage() {
   const [email, setEmail] = useState("");
@@ -161,12 +163,15 @@ export default function AdminPage() {
       <div className="bg-white shadow">
         <div className="container mx-auto px-4 py-6 flex justify-between items-center">
           <h1 className="text-2xl font-bold">Panel de Administración</h1>
-          <button
-            onClick={handleLogout}
-            className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded transition-colors"
-          >
-            Cerrar Sesión
-          </button>
+          <div className="flex items-center space-x-4">
+            <RevalidateButton />
+            <button
+              onClick={handleLogout}
+              className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded transition-colors"
+            >
+              Cerrar Sesión
+            </button>
+          </div>
         </div>
       </div>
 

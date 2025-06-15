@@ -1,14 +1,16 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { FaSave, FaSpinner, FaImage } from 'react-icons/fa';
-import AdminLayout from '@/components/admin/AdminLayout';
-import ImageUploader from '@/components/admin/ImageUploader';
-import { getAllLandingPageData } from '@/lib/api';
-import { updateHero } from '@/lib/api';
-import { Hero } from '@/types/supabase';
-import AdminProtected from '@/components/auth/AdminProtected';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { FaSave, FaSpinner, FaImage } from "react-icons/fa";
+import AdminLayout from "@/components/admin/AdminLayout";
+import ImageUploader from "@/components/admin/ImageUploader";
+import { getAllLandingPageData } from "@/lib/api";
+import { updateHero } from "@/lib/api";
+import { Hero } from "@/types/supabase";
+import AdminProtected from "@/components/auth/AdminProtected";
+import { revalidatePages } from "@/lib/revalidate";
+import RevalidationNotification from "@/components/admin/RevalidationNotification";
 
 export default function HeroAdminPage() {
   return (
@@ -26,11 +28,15 @@ function HeroAdminContent() {
   const [error, setError] = useState<string | null>(null);
   const [heroData, setHeroData] = useState<Hero | null>(null);
   const [formData, setFormData] = useState<Partial<Hero>>({
-    title: '',
-    subtitle: '',
-    button_text: '',
-    image_path: '',
+    title: "",
+    subtitle: "",
+    button_text: "",
+    image_path: ""
   });
+  const [revalidationStatus, setRevalidationStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+  const [revalidationMessage, setRevalidationMessage] = useState<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,16 +45,16 @@ function HeroAdminContent() {
         if (data.hero) {
           setHeroData(data.hero);
           setFormData({
-            title: data.hero.title || '',
-            subtitle: data.hero.subtitle || '',
-            button_text: data.hero.button_text || '',
-            image_path: data.hero.image_path || '',
+            title: data.hero.title || "",
+            subtitle: data.hero.subtitle || "",
+            button_text: data.hero.button_text || "",
+            image_path: data.hero.image_path || ""
           });
         }
         setIsLoading(false);
       } catch (err) {
-        console.error('Error al cargar datos:', err);
-        setError('Error al cargar los datos. Por favor, inténtalo de nuevo.');
+        console.error("Error al cargar datos:", err);
+        setError("Error al cargar los datos. Por favor, inténtalo de nuevo.");
         setIsLoading(false);
       }
     };
@@ -56,7 +62,9 @@ function HeroAdminContent() {
     fetchData();
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -66,22 +74,37 @@ function HeroAdminContent() {
     setIsSaving(true);
     setError(null);
     setSuccess(false);
+    setRevalidationStatus("idle");
+    setRevalidationMessage("");
 
     try {
       if (!heroData?.id) {
-        throw new Error('No se encontró el ID de la sección Hero');
+        throw new Error("No se encontró el ID de la sección Hero");
       }
 
       await updateHero({
         id: heroData.id,
-        ...formData,
+        ...formData
       } as Hero);
 
       setSuccess(true);
+
+      // Dopo il salvataggio, avvia la revalidazione delle pagine
+      setRevalidationStatus("loading");
+      const revalidationResult = await revalidatePages();
+
+      if (revalidationResult.success) {
+        setRevalidationStatus("success");
+        setRevalidationMessage(revalidationResult.message);
+      } else {
+        setRevalidationStatus("error");
+        setRevalidationMessage(revalidationResult.message);
+      }
+
       setTimeout(() => setSuccess(false), 3000);
     } catch (err) {
-      console.error('Error al guardar:', err);
-      setError('Error al guardar los cambios. Por favor, inténtalo de nuevo.');
+      console.error("Error al guardar:", err);
+      setError("Error al guardar los cambios. Por favor, inténtalo de nuevo.");
     } finally {
       setIsSaving(false);
     }
@@ -116,9 +139,17 @@ function HeroAdminContent() {
           </div>
         )}
 
+        <RevalidationNotification
+          status={revalidationStatus}
+          message={revalidationMessage}
+        />
+
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="title" className="block text-gray-700 font-medium mb-2">
+            <label
+              htmlFor="title"
+              className="block text-gray-700 font-medium mb-2"
+            >
               Título Principal
             </label>
             <input
@@ -133,7 +164,10 @@ function HeroAdminContent() {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="subtitle" className="block text-gray-700 font-medium mb-2">
+            <label
+              htmlFor="subtitle"
+              className="block text-gray-700 font-medium mb-2"
+            >
               Subtítulo
             </label>
             <textarea
@@ -147,7 +181,10 @@ function HeroAdminContent() {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="button_text" className="block text-gray-700 font-medium mb-2">
+            <label
+              htmlFor="button_text"
+              className="block text-gray-700 font-medium mb-2"
+            >
               Texto del Botón
             </label>
             <input
@@ -165,7 +202,7 @@ function HeroAdminContent() {
             <label className="block text-gray-700 font-medium mb-2">
               Imagen de Fondo
             </label>
-            
+
             {formData.image_path && (
               <div className="mb-4">
                 <p className="text-sm text-gray-600 mb-2">Imagen actual:</p>
