@@ -14,7 +14,6 @@ const nextConfig: NextConfig = {
     ],
   },
   // Configuración para optimizar el rendimiento
-  swcMinify: true,
   reactStrictMode: true,
   // Configuración para permitir importaciones absolutas
   webpack(config) {
