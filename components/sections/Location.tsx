@@ -20,13 +20,8 @@ const getEmbedUrl = (url: string): string => {
   // 2. Salvarlo nel database Supabase nella tabella location
   // 3. L'URL di incorporamento si ottiene da Google Maps cliccando su "Condividi" e poi "Incorpora una mappa"
 
-  // Messaggio per l'amministratore da mostrare nella console
-  console.log(
-    "NOTA PER ADMIN: Per visualizzare correttamente la mappa, inserire un URL di incorporamento di Google Maps nel database Supabase."
-  );
-  console.log(
-    'Ottieni l\'URL di incorporamento da Google Maps cliccando su "Condividi" e poi "Incorpora una mappa"'
-  );
+  // NOTA PER ADMIN: Per visualizzare correttamente la mappa, inserire un URL di incorporamento di Google Maps nel database Supabase.
+  // Ottieni l'URL di incorporamento da Google Maps cliccando su "Condividi" e poi "Incorpora una mappa"
 
   // Restituisci un URL di incorporamento generico per Valencia
   return "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49432.07586693724!2d-0.4015233!3d39.4699075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604f4cf0efb06f%3A0xb4a351011f7f1d39!2sValencia%2C%20Spagna!5e0!3m2!1sit!2sit!4v1718370264806!5m2!1sit!2sit";

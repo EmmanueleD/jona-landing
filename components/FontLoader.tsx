@@ -44,7 +44,7 @@ export default function FontLoader({ fontFamily, headingFont }: FontLoaderProps)
       link.setAttribute('data-font-loader', 'true');
       document.head.appendChild(link);
       
-      console.log('Loaded fonts:', Array.from(fontsToLoad));
+      // Fonts loaded successfully
     }
     
     return () => {

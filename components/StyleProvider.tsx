@@ -23,26 +23,21 @@ export default function StyleProvider({
   children: ReactNode;
   styles: Record<string, string>;
 }) {
-  // Debug logs for styles
-  console.log('StyleProvider received styles:', styles);
-  
-  // Debug specific nav_transparent value
-  console.log('nav_transparent value:', styles.nav_transparent);
+  // Initialize styles
   
   // Generate CSS variables
   const cssVariables = Object.entries(styles)
     .map(([key, value]) => {
       const camelKey = snakeToCamel(key);
-      // Log nav-related variables
+      // Process nav-related variables
       if (key.startsWith('nav_')) {
-        console.log(`Converting ${key} -> --${camelKey}: ${value}`);
+        // Convert nav variables to CSS custom properties
       }
       return `--${camelKey}: ${value};`
     })
     .join("\n");
   
-  // Log the generated CSS
-  console.log('Generated CSS variables for :root:', cssVariables);
+  // Apply the generated CSS variables
   
   return (
     <>

@@ -30,12 +30,9 @@ const Navbar = ({ initialNavTransparent = 'true' }: NavbarProps) => {
           cssVars[prop] = styles.getPropertyValue(prop);
         }
       }
-      console.log('All nav CSS variables (after mount):', cssVars);
-      
       // Get the CSS variable value or default to initialNavTransparent
       // This ensures we keep the initial value if CSS variables aren't loaded yet
       const navTransparent = styles.getPropertyValue('--navTransparent')?.trim() || initialNavTransparent;
-      console.log('Nav transparent value (after mount):', navTransparent);
       
       // Only update state if the value is different from what we already have
       if (navTransparent !== formattedNavTransparent) {

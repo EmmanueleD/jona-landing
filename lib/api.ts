@@ -24,7 +24,7 @@ export async function getHeroData(): Promise<Hero | null> {
     return null;
   }
 
-  console.log('Hero data retrieved:', data);
+  // Return the hero data
   return data;
 }
 
@@ -222,7 +222,7 @@ export async function getAllLandingPageData() {
 
 // Hero Section
 export async function updateHero(hero: Hero): Promise<Hero | null> {
-  console.log('Updating hero with ID:', hero.id, hero);
+  // Update hero with the provided data
   const { data, error } = await supabase
     .from("hero")
     .update({
