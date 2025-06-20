@@ -441,6 +441,8 @@ export async function updateContactInfo(contactInfo: ContactInfo): Promise<Conta
       instagram: contactInfo.instagram,
       facebook: contactInfo.facebook,
       linkedin: contactInfo.linkedin,
+      tiktok: contactInfo.tiktok,
+      youtube: contactInfo.youtube,
       legal_text: contactInfo.legal_text
     })
     .eq("id", contactInfo.id)

@@ -65,6 +65,8 @@ export type ContactInfo = {
   instagram?: string;
   facebook?: string;
   linkedin?: string;
+  tiktok?: string;
+  youtube?: string;
   legal_text?: string;
   created_at?: string;
   updated_at?: string;

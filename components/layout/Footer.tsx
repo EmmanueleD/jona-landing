@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { FaWhatsapp, FaInstagram, FaFacebook, FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaWhatsapp, FaInstagram, FaFacebook, FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt, FaTiktok, FaYoutube } from 'react-icons/fa';
 import { ContactInfo } from '@/types/supabase';
 
 interface FooterProps {
@@ -69,6 +69,28 @@ const Footer = ({ contactInfo }: FooterProps) => {
                   style={{ transition: 'all 0.3s ease' }}
                 >
                   <FaLinkedin size={24} />
+                </a>
+              )}
+              {contactInfo?.tiktok && (
+                <a 
+                  href={contactInfo.tiktok} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-white hover:opacity-80"
+                  style={{ transition: 'all 0.3s ease' }}
+                >
+                  <FaTiktok size={24} />
+                </a>
+              )}
+              {contactInfo?.youtube && (
+                <a 
+                  href={contactInfo.youtube} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-white hover:opacity-80"
+                  style={{ transition: 'all 0.3s ease' }}
+                >
+                  <FaYoutube size={24} />
                 </a>
               )}
             </div>

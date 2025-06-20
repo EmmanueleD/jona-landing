@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { FaSave, FaSpinner, FaPhone, FaWhatsapp, FaEnvelope, FaInstagram, FaFacebook, FaLinkedin } from 'react-icons/fa';
+import { FaSave, FaSpinner, FaPhone, FaWhatsapp, FaEnvelope, FaInstagram, FaFacebook, FaLinkedin, FaTiktok, FaYoutube } from 'react-icons/fa';
 import AdminLayout from '@/components/admin/AdminLayout';
 import { getAllLandingPageData } from '@/lib/api';
 import { updateContactInfo } from '@/lib/api';
@@ -29,6 +29,8 @@ function ContactAdminContent() {
     instagram: '',
     facebook: '',
     linkedin: '',
+    tiktok: '',
+    youtube: '',
     legal_text: '',
   });
 
@@ -45,6 +47,8 @@ function ContactAdminContent() {
             instagram: data.contactInfo.instagram || '',
             facebook: data.contactInfo.facebook || '',
             linkedin: data.contactInfo.linkedin || '',
+            tiktok: data.contactInfo.tiktok || '',
+            youtube: data.contactInfo.youtube || '',
             legal_text: data.contactInfo.legal_text || '',
           });
         }
@@ -210,6 +214,36 @@ function ContactAdminContent() {
                   value={formData.linkedin}
                   onChange={handleChange}
                   placeholder="https://linkedin.com/in/..."
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div className="mb-4">
+                <label htmlFor="tiktok" className="flex items-center text-gray-700 font-medium mb-2">
+                  <FaTiktok className="mr-2" /> TikTok
+                </label>
+                <input
+                  type="url"
+                  id="tiktok"
+                  name="tiktok"
+                  value={formData.tiktok}
+                  onChange={handleChange}
+                  placeholder="https://tiktok.com/@..."
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              
+              <div className="mb-4">
+                <label htmlFor="youtube" className="flex items-center text-gray-700 font-medium mb-2">
+                  <FaYoutube className="mr-2" /> YouTube
+                </label>
+                <input
+                  type="url"
+                  id="youtube"
+                  name="youtube"
+                  value={formData.youtube}
+                  onChange={handleChange}
+                  placeholder="https://youtube.com/c/..."
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
