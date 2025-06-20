@@ -1,8 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kinesiología Jona
+
+![Kinesiología Jona Logo](public/logo.png)
+
+## Project Information
+
+Professional website for "Kinesiología Jona", a kinesiology service offering personalized treatments to improve patients' health and well-being.
+
+### Main Features
+
+- Modern and responsive design
+- Customizable sections (Hero, About Me, Services, Testimonials, Gallery)
+- Social media integration
+- Admin panel for content management
+- SEO optimization
+- WhatsApp integration for direct contact
+
+## Technologies Used
+
+- **Frontend**: Next.js 14, React, TypeScript, Tailwind CSS
+- **Backend**: Supabase (PostgreSQL, Auth, Storage)
+- **Hosting**: Vercel
+
+## Author
+
+**Emmanuele Durante**
+- Website: [emmanueledurante.com](https://emmanueledurante.com)
+- Copyright: © 2025 Emmanuele Durante
 
 ## Getting Started
 
-First, run the development server:
+To start the development server:
 
 ```bash
 npm run dev
@@ -10,27 +37,29 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+/app                  # Next.js pages structure
+  /admin              # Admin panel
+  /api                # API routes
+/components           # Reusable React components
+  /layout             # Layout components (Navbar, Footer)
+  /sections           # Main landing page sections
+  /ui                 # Generic UI components
+/lib                  # Utility functions and API client
+/public               # Static files
+/types                # TypeScript definitions
+```
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+This project is configured to be easily deployed on [Vercel](https://vercel.com).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+vercel
+```

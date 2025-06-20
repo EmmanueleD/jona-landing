@@ -1,3 +1,10 @@
+/**
+ * Kinesiología Jona - Root Layout Component
+ * 
+ * @author Emmanuele Durante <https://emmanueledurante.com>
+ * @copyright 2025 Emmanuele Durante
+ */
+
 import type { Metadata } from "next";
 // Eliminamos la importación de Inter ya que usamos fuentes dinámicas
 import "./globals.css";

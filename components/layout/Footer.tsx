@@ -220,6 +220,12 @@ const Footer = ({ contactInfo }: FooterProps) => {
           >
             &copy; {currentYear} Kinesiología Jona. Todos los derechos reservados.
           </p>
+          <p 
+            className="text-xs mt-2"
+            style={{ color: 'var(--lightTextColor)' }}
+          >
+            Developed by <a href="https://emmanueledurante.com" target="_blank" rel="noopener noreferrer" className="hover:text-white">Emmanuele Durante</a> © 2025
+          </p>
           {contactInfo?.legal_text && (
             <p 
               className="text-xs mt-2"

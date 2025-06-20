@@ -1,3 +1,10 @@
+/**
+ * Kinesiología Jona - Home Page
+ * 
+ * @author Emmanuele Durante <https://emmanueledurante.com>
+ * @copyright 2025 Emmanuele Durante
+ */
+
 import Image from "next/image";
 import { getAllLandingPageData } from '@/lib/api';
 import Navbar from '@/components/layout/Navbar';

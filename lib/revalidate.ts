@@ -1,7 +1,12 @@
 /**
- * Servizio per la revalidazione on-demand delle pagine
- * Questo servizio chiama l'API di revalidazione per rigenerare le pagine statiche
- * dopo che sono state apportate modifiche ai dati
+ * Kinesiología Jona - Revalidation Service
+ * 
+ * Service for on-demand page revalidation
+ * This service calls the revalidation API to regenerate static pages
+ * after data changes have been made
+ * 
+ * @author Emmanuele Durante <https://emmanueledurante.com>
+ * @copyright 2025 Emmanuele Durante
  */
 
 // Funzione per revalidare le pagine

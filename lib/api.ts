@@ -1,3 +1,10 @@
+/**
+ * Kinesiología Jona - API Module
+ * 
+ * @author Emmanuele Durante <https://emmanueledurante.com>
+ * @copyright 2025 Emmanuele Durante
+ */
+
 import { supabase } from "./supabase";
 import {
   Hero,
