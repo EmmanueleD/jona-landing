@@ -42,7 +42,7 @@ const Footer = ({ contactInfo }: FooterProps) => {
               className="text-2xl font-bold mb-4"
               style={{ fontFamily: "var(--headingFont)" }}
             >
-              Jonathan Müller - Quiropráctico
+              Quiropraxia
             </h3>
             <p className="mb-4" style={{ color: "var(--lightTextColor)" }}>
               Cuidando de tu salud y bienestar a través de tratamientos
