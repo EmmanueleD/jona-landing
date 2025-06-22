@@ -257,7 +257,7 @@ export async function updateAboutMe(aboutMe: AboutMe): Promise<AboutMe | null> {
     .update({
       title: aboutMe.title,
       content: aboutMe.content,
-      profile_image: aboutMe.profile_image
+      image_path: aboutMe.image_path
     })
     .eq("id", aboutMe.id)
     .select()
