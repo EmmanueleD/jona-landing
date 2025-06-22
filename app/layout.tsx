@@ -1,6 +1,6 @@
 /**
  * Kinesiología Jona - Root Layout Component
- * 
+ *
  * @author Emmanuele Durante <https://emmanueledurante.com>
  * @copyright 2025 Emmanuele Durante
  */
@@ -15,15 +15,17 @@ import FontLoader from "@/components/FontLoader";
 // Ya no necesitamos la instancia de Inter
 
 export const metadata: Metadata = {
-  title: 'Kinesiología Jona - Tratamientos personalizados',
-  description: 'Servicios de kinesiología profesional para mejorar tu calidad de vida. Tratamientos personalizados y atención de calidad.',
-  keywords: 'kinesiología, fisioterapia, rehabilitación, tratamiento, salud, bienestar',
-}
+  title: "Dr Jona Cracks",
+  description:
+    "Servicios de quiropraxia profesional para mejorar tu calidad de vida. Tratamientos personalizados y atención de calidad.",
+  keywords:
+    "quiropraxia, fisioterapia, rehabilitación, tratamiento, salud, bienestar"
+};
 
 export default async function RootLayout({
-  children,
+  children
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   const styles = await getStyles();
   return (
@@ -45,10 +47,13 @@ export default async function RootLayout({
       </head>
       <body className="antialiased" suppressHydrationWarning>
         <StyleProvider styles={styles}>
-          <FontLoader fontFamily={styles?.font_family} headingFont={styles?.heading_font} />
+          <FontLoader
+            fontFamily={styles?.font_family}
+            headingFont={styles?.heading_font}
+          />
           {children}
         </StyleProvider>
       </body>
     </html>
-  )
+  );
 }
