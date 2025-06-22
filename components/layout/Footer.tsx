@@ -60,7 +60,7 @@ const Footer = ({ contactInfo }: FooterProps) => {
                   className="text-white hover:opacity-80"
                   style={{ transition: "all 0.3s ease" }}
                 >
-                  <FaInstagram size={24} />
+                  <FaInstagram size={36} />
                 </a>
               )}
               {contactInfo?.facebook && (
@@ -71,7 +71,7 @@ const Footer = ({ contactInfo }: FooterProps) => {
                   className="text-white hover:opacity-80"
                   style={{ transition: "all 0.3s ease" }}
                 >
-                  <FaFacebook size={24} />
+                  <FaFacebook size={36} />
                 </a>
               )}
               {contactInfo?.linkedin && (
@@ -82,7 +82,7 @@ const Footer = ({ contactInfo }: FooterProps) => {
                   className="text-white hover:opacity-80"
                   style={{ transition: "all 0.3s ease" }}
                 >
-                  <FaLinkedin size={24} />
+                  <FaLinkedin size={36} />
                 </a>
               )}
               {contactInfo?.tiktok && (
@@ -93,7 +93,7 @@ const Footer = ({ contactInfo }: FooterProps) => {
                   className="text-white hover:opacity-80"
                   style={{ transition: "all 0.3s ease" }}
                 >
-                  <FaTiktok size={24} />
+                  <FaTiktok size={36} />
                 </a>
               )}
               {contactInfo?.youtube && (
@@ -104,7 +104,7 @@ const Footer = ({ contactInfo }: FooterProps) => {
                   className="text-white hover:opacity-80"
                   style={{ transition: "all 0.3s ease" }}
                 >
-                  <FaYoutube size={24} />
+                  <FaYoutube size={36} />
                 </a>
               )}
             </div>
