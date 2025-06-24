@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { FaSave, FaSpinner, FaUser } from 'react-icons/fa';
 import AdminLayout from '@/components/admin/AdminLayout';
 import ImageUploader from '@/components/admin/ImageUploader';
+import RichTextEditor from '@/components/admin/RichTextEditor';
 import { getAllLandingPageData } from '@/lib/api';
 import { updateAboutMe } from '@/lib/api';
 import { AboutMe } from '@/types/supabase';
@@ -132,17 +133,14 @@ function AboutMeAdminContent() {
             <label htmlFor="content" className="block text-gray-700 font-medium mb-2">
               Contenido
             </label>
-            <textarea
-              id="content"
-              name="content"
-              value={formData.content}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-              rows={8}
-              required
+            <RichTextEditor
+              value={formData.content || ''}
+              onChange={(value) => setFormData((prev) => ({ ...prev, content: value }))}
+              placeholder="Escribe el contenido aquí..."
+              height="300px"
             />
             <p className="text-sm text-gray-500 mt-1">
-              Puedes usar formato Markdown para dar estilo al texto.
+              Usa el editor para dar formato al texto.
             </p>
           </div>
 

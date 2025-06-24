@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { FaPlus, FaEdit, FaTrash, FaSave, FaSpinner } from 'react-icons/fa';
 import AdminLayout from '@/components/admin/AdminLayout';
 import ImageUploader from '@/components/admin/ImageUploader';
+import RichTextEditor from '@/components/admin/RichTextEditor';
 import { getAllLandingPageData, createService, updateService, deleteService } from '@/lib/api';
 import { Service } from '@/types/supabase';
 import AdminProtected from '@/components/auth/AdminProtected';
@@ -195,14 +196,11 @@ function ServicesAdminContent() {
               <label htmlFor="description" className="block text-gray-700 font-medium mb-2">
                 Descripción
               </label>
-              <textarea
-                id="description"
-                name="description"
+              <RichTextEditor
                 value={editingService.description || ''}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                rows={4}
-                required
+                onChange={(value) => setEditingService((prev) => prev ? { ...prev, description: value } : null)}
+                placeholder="Escribe la descripción aquí..."
+                height="200px"
               />
             </div>
 

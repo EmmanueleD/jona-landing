@@ -96,9 +96,36 @@ const Services = ({ services, whatsappNumber }: ServicesProps) => {
                   >
                     {service.title}
                   </h3>
-                  <p className="mb-4" style={{ color: "var(--textColor)" }}>
-                    {service.description}
-                  </p>
+                  <div 
+                    className="mb-4 prose prose-sm max-w-none tiptap-content" 
+                    style={{ color: "var(--textColor)" }}
+                    dangerouslySetInnerHTML={{ __html: service.description }}
+                  />
+                  <style jsx global>{`
+                    .tiptap-content p {
+                      margin-bottom: 0.75rem;
+                    }
+                    .tiptap-content p:last-child {
+                      margin-bottom: 0;
+                    }
+                    .tiptap-content ul, .tiptap-content ol {
+                      margin-left: 1.25rem;
+                      margin-bottom: 0.75rem;
+                    }
+                    .tiptap-content ul {
+                      list-style-type: disc;
+                    }
+                    .tiptap-content ol {
+                      list-style-type: decimal;
+                    }
+                    .tiptap-content li {
+                      margin-bottom: 0.25rem;
+                    }
+                    .tiptap-content a {
+                      color: var(--primaryColor);
+                      text-decoration: underline;
+                    }
+                  `}</style>
 
                   <div className="flex items-center justify-between">
                     <span

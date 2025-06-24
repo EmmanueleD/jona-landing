@@ -1,74 +1,106 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { AboutMe as AboutMeType } from '@/types/supabase';
-import { getImageUrl } from '@/lib/supabase';
+import Image from "next/image";
+import { AboutMe as AboutMeType } from "@/types/supabase";
+import { getImageUrl } from "@/lib/supabase";
 
 interface AboutMeProps {
   data: AboutMeType;
 }
 
 const AboutMe = ({ data }: AboutMeProps) => {
-  const imageUrl = data.image_path ? getImageUrl('about', data.image_path) : null;
+  const imageUrl = data.image_path
+    ? getImageUrl("about", data.image_path)
+    : null;
 
   return (
-    <section 
-      id="sobre-mi" 
-      style={{ 
-        padding: 'var(--sectionPadding) 0',
-        backgroundColor: 'var(--lightBackgroundColor)'
+    <section
+      id="sobre-mi"
+      style={{
+        padding: "var(--sectionPadding) 0",
+        backgroundColor: "var(--lightBackgroundColor)"
       }}
     >
-      <div 
+      <div
         className="container mx-auto px-4"
-        style={{ maxWidth: 'var(--containerMaxWidth)' }}
+        style={{ maxWidth: "var(--containerMaxWidth)" }}
       >
         <div className="flex flex-col md:flex-row items-center gap-12">
           {/* Imagen */}
           <div className="w-full md:w-1/2 mb-8 md:mb-0">
-            <div 
+            <div
               className="relative h-[400px] md:h-[500px] overflow-hidden"
-              style={{ 
-                borderRadius: 'var(--borderRadius)',
-                boxShadow: 'var(--boxShadow)'
+              style={{
+                borderRadius: "var(--borderRadius)",
+                boxShadow: "var(--boxShadow)"
               }}
             >
               {imageUrl ? (
-                <Image 
-                  src={imageUrl} 
-                  alt={data.title} 
+                <Image
+                  src={imageUrl}
+                  alt={data.title}
                   fill
                   className="object-cover"
                 />
               ) : (
-                <div 
+                <div
                   className="w-full h-full flex items-center justify-center"
-                  style={{ backgroundColor: 'var(--lightBackgroundColor)' }}
+                  style={{ backgroundColor: "var(--lightBackgroundColor)" }}
                 >
-                  <span style={{ color: 'var(--primaryColor)' }} className="text-lg">
+                  <span
+                    style={{ color: "var(--primaryColor)" }}
+                    className="text-lg"
+                  >
                     Imagen no disponible
                   </span>
                 </div>
               )}
             </div>
           </div>
-          
+
           {/* Contenido */}
           <div className="w-full md:w-1/2">
-            <h2 
+            <h2
               className="text-3xl md:text-4xl font-bold mb-6"
-              style={{ 
-                color: 'var(--textColor)',
-                fontFamily: 'var(--headingFont)'
+              style={{
+                color: "var(--textColor)",
+                fontFamily: "var(--headingFont)"
               }}
             >
               {data.title}
             </h2>
-            <div 
-              className="prose prose-lg max-w-none"
-              style={{ color: 'var(--textColor)' }}
+            <div
+              className="prose prose-lg max-w-none tiptap-content"
+              style={{ color: "var(--textColor)" }}
               dangerouslySetInnerHTML={{ __html: data.content }}
             />
+            <style jsx global>{`
+              .tiptap-content p {
+                min-height: 1.2em;
+                margin-bottom: 1rem;
+              }
+              .tiptap-content p:last-child {
+                margin-bottom: 0;
+              }
+              .tiptap-content ul,
+              .tiptap-content ol {
+                margin-left: 1.5rem;
+                margin-bottom: 1rem;
+              }
+              .tiptap-content ul {
+                list-style-type: disc;
+              }
+              .tiptap-content ol {
+                list-style-type: decimal;
+              }
+              .tiptap-content li {
+                margin-bottom: 0.5rem;
+              }
+              .tiptap-content a {
+                color: var(--primaryColor);
+                text-decoration: underline;
+              }
+            `}</style>
           </div>
         </div>
       </div>
