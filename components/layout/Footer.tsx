@@ -237,12 +237,59 @@ const Footer = ({ contactInfo }: FooterProps) => {
 
         {/* Copyright y texto legal */}
         <div className="text-center">
-          <p className="text-sm" style={{ color: "var(--lightTextColor)" }}>
+          <p
+            className="text-sm mb-2"
+            style={{ color: "var(--lightTextColor)" }}
+          >
             &copy; {currentYear} Kinesiología Jona. Todos los derechos
             reservados.
           </p>
+          <div 
+            className="text-xs mb-2 flex justify-center space-x-4"
+            style={{ color: "var(--lightTextColor)" }}
+          >
+            <a
+              href="https://www.freeprivacypolicy.com/live/9a49ec88-7d8a-4427-82fb-23b1e19431e3"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white"
+            >
+              Política de privacidad
+            </a>
+            <a
+              href="https://www.freeprivacypolicy.com/live/5bf4ad34-9295-4733-927f-a8bf7d0fdb0e"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white"
+            >
+              Política de cookies
+            </a>
+            {contactInfo?.legal_text && (
+              <button
+                onClick={() => setIsLegalTextOpen(true)}
+                className="hover:underline cursor-pointer"
+                style={{ color: "var(--lightTextColor)" }}
+              >
+                Texto legal
+              </button>
+            )}
+          </div>
+
+          {/* Diálogo para el texto legal */}
+          {contactInfo?.legal_text && (
+            <Dialog
+              isOpen={isLegalTextOpen}
+              onClose={() => setIsLegalTextOpen(false)}
+              title="Texto Legal"
+            >
+              <div className="prose prose-sm max-w-none text-gray-800">
+                {contactInfo.legal_text}
+              </div>
+            </Dialog>
+          )}
+
           <p
-            className="text-xs mt-2"
+            className="text-xs my-4"
             style={{ color: "var(--lightTextColor)" }}
           >
             Developed by{" "}
@@ -256,28 +303,6 @@ const Footer = ({ contactInfo }: FooterProps) => {
             </a>{" "}
             © 2025
           </p>
-          {contactInfo?.legal_text && (
-            <button
-              onClick={() => setIsLegalTextOpen(true)}
-              className="text-xs mt-2 hover:underline cursor-pointer"
-              style={{ color: "var(--lightTextColor)" }}
-            >
-              Texto legal
-            </button>
-          )}
-          
-          {/* Diálogo para el texto legal */}
-          {contactInfo?.legal_text && (
-            <Dialog
-              isOpen={isLegalTextOpen}
-              onClose={() => setIsLegalTextOpen(false)}
-              title="Texto Legal"
-            >
-              <div className="prose prose-sm max-w-none text-gray-800">
-                {contactInfo.legal_text}
-              </div>
-            </Dialog>
-          )}
         </div>
       </div>
     </footer>
