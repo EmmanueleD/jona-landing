@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import {
   FaWhatsapp,
   FaInstagram,
@@ -13,6 +14,7 @@ import {
   FaYoutube
 } from "react-icons/fa";
 import { ContactInfo } from "@/types/supabase";
+import Dialog from "../ui/Dialog";
 
 interface FooterProps {
   contactInfo: ContactInfo;
@@ -20,6 +22,7 @@ interface FooterProps {
 
 const Footer = ({ contactInfo }: FooterProps) => {
   const currentYear = new Date().getFullYear();
+  const [isLegalTextOpen, setIsLegalTextOpen] = useState(false);
 
   const whatsappLink = contactInfo?.whatsapp
     ? `https://wa.me/${contactInfo.whatsapp.replace(/\D/g, "")}`
@@ -254,12 +257,26 @@ const Footer = ({ contactInfo }: FooterProps) => {
             © 2025
           </p>
           {contactInfo?.legal_text && (
-            <p
-              className="text-xs mt-2"
+            <button
+              onClick={() => setIsLegalTextOpen(true)}
+              className="text-xs mt-2 hover:underline cursor-pointer"
               style={{ color: "var(--lightTextColor)" }}
             >
-              {contactInfo.legal_text}
-            </p>
+              Texto legal
+            </button>
+          )}
+          
+          {/* Diálogo para el texto legal */}
+          {contactInfo?.legal_text && (
+            <Dialog
+              isOpen={isLegalTextOpen}
+              onClose={() => setIsLegalTextOpen(false)}
+              title="Texto Legal"
+            >
+              <div className="prose prose-sm max-w-none text-gray-800">
+                {contactInfo.legal_text}
+              </div>
+            </Dialog>
           )}
         </div>
       </div>

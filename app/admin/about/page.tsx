@@ -91,7 +91,7 @@ function AboutMeAdminContent() {
   if (isLoading) {
     return (
       <AdminLayout title="Cargando...">
-        <div className="flex justify-center items-center h-64">
+        <div id="about-admin-loading" className="flex justify-center items-center h-64">
           <FaSpinner className="animate-spin text-green-500 text-4xl" />
         </div>
       </AdminLayout>
@@ -100,7 +100,7 @@ function AboutMeAdminContent() {
 
   return (
     <AdminLayout title="Editar Sección Sobre Mí">
-      <div className="bg-white rounded-lg shadow p-6">
+      <div id="about-admin-form-container" className="bg-white rounded-lg shadow p-6">
         {error && (
           <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6">
             <p>{error}</p>
@@ -113,8 +113,8 @@ function AboutMeAdminContent() {
           </div>
         )}
 
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
+        <form id="about-admin-form" onSubmit={handleSubmit}>
+          <div id="about-admin-title-field" className="mb-4">
             <label htmlFor="title" className="block text-gray-700 font-medium mb-2">
               Título
             </label>
@@ -129,7 +129,7 @@ function AboutMeAdminContent() {
             />
           </div>
 
-          <div className="mb-4">
+          <div id="about-admin-content-field" className="mb-4">
             <label htmlFor="content" className="block text-gray-700 font-medium mb-2">
               Contenido
             </label>
@@ -144,7 +144,7 @@ function AboutMeAdminContent() {
             </p>
           </div>
 
-          <div className="mb-6">
+          <div id="about-admin-image-field" className="mb-6">
             <label className="block text-gray-700 font-medium mb-2">
               Foto
             </label>

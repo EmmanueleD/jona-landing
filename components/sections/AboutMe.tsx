@@ -22,13 +22,15 @@ const AboutMe = ({ data }: AboutMeProps) => {
       }}
     >
       <div
+        id="about-container"
         className="container mx-auto px-4"
         style={{ maxWidth: "var(--containerMaxWidth)" }}
       >
-        <div className="flex flex-col md:flex-row items-center gap-12">
+        <div id="about-content-wrapper" className="flex flex-col md:flex-row items-center gap-12">
           {/* Imagen */}
-          <div className="w-full md:w-1/2 mb-8 md:mb-0">
+          <div id="about-image-container" className="w-full md:w-1/2 mb-8 md:mb-0">
             <div
+              id="about-image-wrapper"
               className="relative h-[400px] md:h-[500px] overflow-hidden"
               style={{
                 borderRadius: "var(--borderRadius)",
@@ -59,7 +61,7 @@ const AboutMe = ({ data }: AboutMeProps) => {
           </div>
 
           {/* Contenido */}
-          <div className="w-full md:w-1/2">
+          <div id="about-text-container" className="w-full md:w-1/2">
             <h2
               className="text-3xl md:text-4xl font-bold mb-6"
               style={{
@@ -70,6 +72,7 @@ const AboutMe = ({ data }: AboutMeProps) => {
               {data.title}
             </h2>
             <div
+              id="about-rich-content"
               className="prose prose-lg max-w-none tiptap-content"
               style={{ color: "var(--textColor)" }}
               dangerouslySetInnerHTML={{ __html: data.content }}

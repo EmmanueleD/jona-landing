@@ -97,8 +97,8 @@ const RichTextEditor = ({ value, onChange, placeholder = 'Escribe aquí...', hei
   }
 
   return (
-    <div className="rich-text-editor border rounded-lg overflow-hidden">
-      <div className="toolbar bg-gray-50 p-2 border-b flex flex-wrap gap-1">
+    <div id="rich-text-editor-container" className="rich-text-editor border rounded-lg overflow-hidden">
+      <div id="rich-text-editor-toolbar" className="toolbar bg-gray-50 p-2 border-b flex flex-wrap gap-1">
         <button
           type="button"
           onClick={toggleBold}
@@ -159,7 +159,7 @@ const RichTextEditor = ({ value, onChange, placeholder = 'Escribe aquí...', hei
           <FaUnlink />
         </button>
       </div>
-      <EditorContent editor={editor} className="editor-content" />
+      <EditorContent id="rich-text-editor-content" editor={editor} className="editor-content" />
       <style jsx global>{`
         .rich-text-editor .editor-content {
           background: white;

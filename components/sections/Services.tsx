@@ -26,10 +26,11 @@ const Services = ({ services, whatsappNumber }: ServicesProps) => {
   return (
     <section id="servicios" style={{ padding: "var(--sectionPadding) 0" }}>
       <div
+        id="services-container"
         className="container mx-auto px-4"
         style={{ maxWidth: "var(--containerMaxWidth)" }}
       >
-        <div className="text-center mb-16">
+        <div id="services-header" className="text-center mb-12">
           <h2
             className="text-3xl md:text-4xl font-bold mb-4"
             style={{
@@ -48,7 +49,10 @@ const Services = ({ services, whatsappNumber }: ServicesProps) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          id="services-grid"
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+        >
           {services.map((service) => {
             const imageUrl = service.image_path
               ? getImageUrl("services", service.image_path)
@@ -58,15 +62,18 @@ const Services = ({ services, whatsappNumber }: ServicesProps) => {
 
             return (
               <div
+                id={`service-card-${service.id}`}
                 key={service.id}
-                className="overflow-hidden transition-transform hover:scale-105"
+                className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105 h-full flex flex-col"
                 style={{
-                  backgroundColor: "var(--backgroundColor)",
                   borderRadius: "var(--borderRadius)",
                   boxShadow: "var(--boxShadow)"
                 }}
               >
-                <div className="h-64 relative">
+                <div
+                  className="h-64 md:h-96 relative"
+                  style={imageUrl ? undefined : { display: "none" }}
+                >
                   {imageUrl ? (
                     <Image
                       src={imageUrl}
@@ -74,19 +81,13 @@ const Services = ({ services, whatsappNumber }: ServicesProps) => {
                       fill
                       className="object-cover"
                     />
-                  ) : (
-                    <div
-                      className="w-full h-full flex items-center justify-center"
-                      style={{ backgroundColor: "var(--lightBackgroundColor)" }}
-                    >
-                      <span style={{ color: "var(--primaryColor)" }}>
-                        Imagen no disponible
-                      </span>
-                    </div>
-                  )}
+                  ) : null}
                 </div>
 
-                <div className="p-6">
+                <div
+                  id={`service-content-${service.id}`}
+                  className="p-6 flex-1 flex flex-col"
+                >
                   <h3
                     className="text-xl font-bold mb-2"
                     style={{
@@ -96,8 +97,9 @@ const Services = ({ services, whatsappNumber }: ServicesProps) => {
                   >
                     {service.title}
                   </h3>
-                  <div 
-                    className="mb-4 prose prose-sm max-w-none tiptap-content" 
+                  <div
+                    id={`service-description-${service.id}`}
+                    className="mb-4 prose prose-sm max-w-none tiptap-content"
                     style={{ color: "var(--textColor)" }}
                     dangerouslySetInnerHTML={{ __html: service.description }}
                   />
@@ -108,7 +110,8 @@ const Services = ({ services, whatsappNumber }: ServicesProps) => {
                     .tiptap-content p:last-child {
                       margin-bottom: 0;
                     }
-                    .tiptap-content ul, .tiptap-content ol {
+                    .tiptap-content ul,
+                    .tiptap-content ol {
                       margin-left: 1.25rem;
                       margin-bottom: 0.75rem;
                     }
@@ -132,7 +135,7 @@ const Services = ({ services, whatsappNumber }: ServicesProps) => {
                       className="text-xl font-bold"
                       style={{ color: "var(--primaryColor)" }}
                     >
-                      ${service.price.toFixed(2)}
+                      {service.price ? `$${service.price.toFixed(2)}` : ""}
                     </span>
 
                     <button
