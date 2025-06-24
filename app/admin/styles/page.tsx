@@ -1,7 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { FaSave, FaSpinner, FaPalette, FaFont, FaBorderStyle, FaImage, FaBars } from 'react-icons/fa';
+import { FaSave, FaSpinner, FaPalette, FaFont, FaBorderStyle, FaImage, FaBars, FaHeading } from 'react-icons/fa';
+import ImageUploader from "@/components/admin/ImageUploader";
+import { getImageUrl } from "@/lib/supabase";
 import AdminLayout from '@/components/admin/AdminLayout';
 import { getAllLandingPageData } from '@/lib/api';
 import { updateStyles } from '@/lib/api';
@@ -33,6 +35,9 @@ function StylesAdminContent() {
     heading_font: '',
     border_radius: '',
     box_shadow: '',
+    logo_type: 'text',
+    logo_text: 'Quiropraxia',
+    logo_image_url: '',
     
     // Hero section styles
     hero_background_color: 'rgba(0, 0, 0, 0.4)',
@@ -75,6 +80,9 @@ function StylesAdminContent() {
             heading_font: data.styles.heading_font || '',
             border_radius: data.styles.border_radius || '',
             box_shadow: data.styles.box_shadow || '',
+            logo_type: data.styles.logo_type || 'text',
+            logo_text: data.styles.logo_text || 'Quiropraxia',
+            logo_image_url: data.styles.logo_image_url || '',
             
             // Hero section styles
             hero_background_color: data.styles.hero_background_color || 'rgba(0, 0, 0, 0.4)',
@@ -111,6 +119,13 @@ function StylesAdminContent() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleLogoUpload = (filePath: string) => {
+    setFormData(prev => ({
+      ...prev,
+      logo_image_url: filePath
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -550,6 +565,110 @@ function StylesAdminContent() {
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                     placeholder="100vh"
                   />
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Logo Configuration */}
+          <div className="mt-8 border-t pt-8">
+            <h3 className="text-lg font-semibold mb-4 flex items-center">
+              <FaHeading className="mr-2" /> Logo / Marca
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 font-medium mb-2">
+                    Tipo de Logo
+                  </label>
+                  <div className="flex items-center space-x-4">
+                    <label className="inline-flex items-center">
+                      <input
+                        type="radio"
+                        name="logo_type"
+                        value="text"
+                        checked={formData.logo_type === 'text'}
+                        onChange={handleChange}
+                        className="form-radio h-5 w-5 text-purple-600"
+                      />
+                      <span className="ml-2">Texto</span>
+                    </label>
+                    <label className="inline-flex items-center">
+                      <input
+                        type="radio"
+                        name="logo_type"
+                        value="image"
+                        checked={formData.logo_type === 'image'}
+                        onChange={handleChange}
+                        className="form-radio h-5 w-5 text-purple-600"
+                      />
+                      <span className="ml-2">Imagen</span>
+                    </label>
+                  </div>
+                </div>
+                
+                {formData.logo_type === 'text' && (
+                  <div className="mb-4">
+                    <label htmlFor="logo_text" className="block text-gray-700 font-medium mb-2">
+                      Texto del Logo
+                    </label>
+                    <input
+                      type="text"
+                      id="logo_text"
+                      name="logo_text"
+                      value={formData.logo_text}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      placeholder="Quiropraxia"
+                    />
+                  </div>
+                )}
+                
+                {formData.logo_type === 'image' && (
+                  <div className="mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Imagen del logo
+                    </label>
+                    <div className="mb-2">
+                      <ImageUploader
+                        bucket="logos"
+                        path="logo"
+                        onSuccess={handleLogoUpload}
+                      />
+                    </div>
+                    {formData.logo_image_url && (
+                      <div className="mt-2 text-sm text-gray-500">
+                        Imagen seleccionada: {formData.logo_image_url.split('/').pop()}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+              
+              <div>
+                <div className="p-4 border rounded-lg">
+                  <h4 className="text-sm font-medium text-gray-700 mb-2">Vista previa del Logo</h4>
+                  <div className="bg-gray-100 p-4 rounded flex items-center justify-center h-28">
+                    {formData.logo_type === 'text' ? (
+                      <span 
+                        className="text-2xl font-bold"
+                        style={{ color: formData.primary_color }}
+                      >
+                        {formData.logo_text || 'Quiropraxia'}
+                      </span>
+                    ) : (
+                      formData.logo_image_url ? (
+                        <img 
+                          src={getImageUrl('logos', formData.logo_image_url) || ''} 
+                          alt="Logo Preview" 
+                          className="max-h-full max-w-full object-contain h-20"
+                        />
+                      ) : (
+                        <span className="text-gray-400 text-sm">Ingresa una URL de imagen válida</span>
+                      )
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

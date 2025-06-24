@@ -107,6 +107,9 @@ export interface Styles {
   heading_font: string;
   border_radius: string;
   box_shadow: string;
+  logo_type?: 'text' | 'image';
+  logo_text?: string;
+  logo_image_url?: string;
   created_at?: string;
   updated_at?: string;
 }

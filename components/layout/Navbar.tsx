@@ -3,12 +3,21 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { getImageUrl } from "@/lib/supabase";
 
 interface NavbarProps {
   initialNavTransparent?: string;
+  logoType?: "text" | "image";
+  logoText?: string;
+  logoImageUrl?: string;
 }
 
-const Navbar = ({ initialNavTransparent = "true" }: NavbarProps) => {
+const Navbar = ({
+  initialNavTransparent = "true",
+  logoType = "text",
+  logoText = "Quiropraxia",
+  logoImageUrl = ""
+}: NavbarProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   // Inicializar con el valor proporcionado por props para evitar el flash de estilo
@@ -83,16 +92,28 @@ const Navbar = ({ initialNavTransparent = "true" }: NavbarProps) => {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link href="/" className="flex items-center">
-          <span
-            className="text-xl font-bold"
-            style={{ color: "var(--navTextColor, #1f2937)" }}
-          >
-            Quiropraxia
-          </span>
+          {logoType === "text" ? (
+            <span
+              className="text-2xl font-bold"
+              style={{ color: "var(--navTextColor, #1f2937)" }}
+            >
+              {logoText}
+            </span>
+          ) : (
+            logoImageUrl && (
+              <Image
+                src={getImageUrl("logos", logoImageUrl) || ""}
+                alt="Logo"
+                width={200}
+                height={50}
+                className="max-h-14 w-auto object-contain"
+              />
+            )
+          )}
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-8">
+        <div className="hidden md:flex items-center space-x-8">
           <Link
             href="/#sobre-mi"
             className="transition-colors hover:text-[var(--navHoverColor,#3b82f6)]"

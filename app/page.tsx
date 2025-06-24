@@ -37,7 +37,12 @@ export default async function Home() {
 
   return (
     <>
-      <Navbar initialNavTransparent={styles?.nav_transparent || 'true'} />
+      <Navbar 
+        initialNavTransparent={styles?.nav_transparent || 'true'}
+        logoType={(styles?.logo_type as 'text' | 'image') || 'text'}
+        logoText={styles?.logo_text || 'Quiropraxia'}
+        logoImageUrl={styles?.logo_image_url || ''}
+      />
       <main>
         {hero && <Hero data={hero} whatsappNumber={whatsappNumber} />}
         {aboutMe && <AboutMe data={aboutMe} />}

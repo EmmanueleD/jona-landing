@@ -145,6 +145,9 @@ export const getStyles = async (): Promise<Record<string, string>> => {
     heading_font: "'Montserrat', sans-serif",
     border_radius: '0.25rem',
     box_shadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+    logo_type: 'text',
+    logo_text: 'Quiropraxia',
+    logo_image_url: '',
     
     // Hero section styles
     hero_background_color: 'rgba(0, 0, 0, 0.4)', // Overlay color
