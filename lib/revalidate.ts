@@ -1,10 +1,10 @@
 /**
- * Kinesiología Jona - Revalidation Service
- * 
+ * Quiropraxia Jona - Revalidation Service
+ *
  * Service for on-demand page revalidation
  * This service calls the revalidation API to regenerate static pages
  * after data changes have been made
- * 
+ *
  * @author Emmanuele Durante <https://emmanueledurante.com>
  * @copyright 2025 Emmanuele Durante
  */

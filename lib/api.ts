@@ -1,6 +1,6 @@
 /**
- * Kinesiología Jona - API Module
- * 
+ * Quiropraxia Jona - API Module
+ *
  * @author Emmanuele Durante <https://emmanueledurante.com>
  * @copyright 2025 Emmanuele Durante
  */
@@ -136,38 +136,38 @@ export const getStyles = async (): Promise<Record<string, string>> => {
   // Assicurati che tutte le proprietà necessarie siano presenti
   const defaultStyles = {
     // General styles
-    primary_color: '#000000',
-    secondary_color: '#000000',
-    accent_color: '#000000',
-    text_color: '#000000',
-    background_color: '#ffffff',
+    primary_color: "#000000",
+    secondary_color: "#000000",
+    accent_color: "#000000",
+    text_color: "#000000",
+    background_color: "#ffffff",
     font_family: "'Roboto', sans-serif",
     heading_font: "'Montserrat', sans-serif",
-    border_radius: '0.25rem',
-    box_shadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
-    logo_type: 'text',
-    logo_text: 'Quiropraxia',
-    logo_image_url: '',
-    
+    border_radius: "0.25rem",
+    box_shadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)",
+    logo_type: "text",
+    logo_text: "Quiropraxia",
+    logo_image_url: "",
+
     // Hero section styles
-    hero_background_color: 'rgba(0, 0, 0, 0.4)', // Overlay color
-    hero_text_color: '#ffffff',
-    hero_title_size: '3rem',
-    hero_subtitle_size: '1.5rem',
-    hero_button_color: '#f59e0b',
-    hero_button_text_color: '#ffffff',
-    hero_height: '100vh',
-    
+    hero_background_color: "rgba(0, 0, 0, 0.4)", // Overlay color
+    hero_text_color: "#ffffff",
+    hero_title_size: "3rem",
+    hero_subtitle_size: "1.5rem",
+    hero_button_color: "#f59e0b",
+    hero_button_text_color: "#ffffff",
+    hero_height: "100vh",
+
     // Navigation styles
-    nav_background_color: '#ffffff',
-    nav_text_color: '#1f2937',
-    nav_hover_color: '#3b82f6',
-    nav_active_color: '#1e40af',
-    nav_button_color: '#3b82f6',
-    nav_button_text_color: '#ffffff',
-    nav_transparent: 'true',
-    nav_scrolled_background: '#ffffff',
-    nav_scrolled_shadow: '0 2px 4px rgba(0,0,0,0.1)'
+    nav_background_color: "#ffffff",
+    nav_text_color: "#1f2937",
+    nav_hover_color: "#3b82f6",
+    nav_active_color: "#1e40af",
+    nav_button_color: "#3b82f6",
+    nav_button_text_color: "#ffffff",
+    nav_transparent: "true",
+    nav_scrolled_background: "#ffffff",
+    nav_scrolled_shadow: "0 2px 4px rgba(0,0,0,0.1)"
   };
 
   const { data, error } = await supabase.from("styles").select("*");
@@ -182,7 +182,7 @@ export const getStyles = async (): Promise<Record<string, string>> => {
     acc[style.key] = style.value;
     return acc;
   }, {} as Record<string, string>);
-  
+
   // Unisci i valori predefiniti con quelli recuperati dal database
   return { ...defaultStyles, ...stylesObject };
 };
@@ -275,7 +275,9 @@ export async function updateAboutMe(aboutMe: AboutMe): Promise<AboutMe | null> {
 }
 
 // Services Section
-export async function createService(service: Omit<Service, "id">): Promise<Service> {
+export async function createService(
+  service: Omit<Service, "id">
+): Promise<Service> {
   const { data, error } = await supabase
     .from("services")
     .insert([service])
@@ -312,10 +314,7 @@ export async function updateService(service: Service): Promise<Service | null> {
 }
 
 export async function deleteService(id: number): Promise<void> {
-  const { error } = await supabase
-    .from("services")
-    .delete()
-    .eq("id", id);
+  const { error } = await supabase.from("services").delete().eq("id", id);
 
   if (error) {
     console.error("Error deleting service:", error);
@@ -324,7 +323,9 @@ export async function deleteService(id: number): Promise<void> {
 }
 
 // Testimonials Section
-export async function createTestimonial(testimonial: Omit<Testimonial, "id">): Promise<Testimonial> {
+export async function createTestimonial(
+  testimonial: Omit<Testimonial, "id">
+): Promise<Testimonial> {
   const { data, error } = await supabase
     .from("testimonials")
     .insert([testimonial])
@@ -339,7 +340,9 @@ export async function createTestimonial(testimonial: Omit<Testimonial, "id">): P
   return data;
 }
 
-export async function updateTestimonial(testimonial: Testimonial): Promise<Testimonial | null> {
+export async function updateTestimonial(
+  testimonial: Testimonial
+): Promise<Testimonial | null> {
   const { data, error } = await supabase
     .from("testimonials")
     .update({
@@ -360,10 +363,7 @@ export async function updateTestimonial(testimonial: Testimonial): Promise<Testi
 }
 
 export async function deleteTestimonial(id: number): Promise<void> {
-  const { error } = await supabase
-    .from("testimonials")
-    .delete()
-    .eq("id", id);
+  const { error } = await supabase.from("testimonials").delete().eq("id", id);
 
   if (error) {
     console.error("Error deleting testimonial:", error);
@@ -372,7 +372,9 @@ export async function deleteTestimonial(id: number): Promise<void> {
 }
 
 // Gallery Section
-export async function createGalleryImage(image: Omit<GalleryImage, "id">): Promise<GalleryImage> {
+export async function createGalleryImage(
+  image: Omit<GalleryImage, "id">
+): Promise<GalleryImage> {
   const { data, error } = await supabase
     .from("gallery")
     .insert([image])
@@ -387,7 +389,9 @@ export async function createGalleryImage(image: Omit<GalleryImage, "id">): Promi
   return data;
 }
 
-export async function updateGalleryImage(image: GalleryImage): Promise<GalleryImage | null> {
+export async function updateGalleryImage(
+  image: GalleryImage
+): Promise<GalleryImage | null> {
   const { data, error } = await supabase
     .from("gallery")
     .update({
@@ -408,10 +412,7 @@ export async function updateGalleryImage(image: GalleryImage): Promise<GalleryIm
 }
 
 export async function deleteGalleryImage(id: number): Promise<void> {
-  const { error } = await supabase
-    .from("gallery")
-    .delete()
-    .eq("id", id);
+  const { error } = await supabase.from("gallery").delete().eq("id", id);
 
   if (error) {
     console.error("Error deleting gallery image:", error);
@@ -420,7 +421,9 @@ export async function deleteGalleryImage(id: number): Promise<void> {
 }
 
 // Location Section
-export async function updateLocation(location: Location): Promise<Location | null> {
+export async function updateLocation(
+  location: Location
+): Promise<Location | null> {
   const { data, error } = await supabase
     .from("location")
     .update({
@@ -441,7 +444,9 @@ export async function updateLocation(location: Location): Promise<Location | nul
 }
 
 // Contact Info Section
-export async function updateContactInfo(contactInfo: ContactInfo): Promise<ContactInfo | null> {
+export async function updateContactInfo(
+  contactInfo: ContactInfo
+): Promise<ContactInfo | null> {
   const { data, error } = await supabase
     .from("contact_info")
     .update({
@@ -468,29 +473,34 @@ export async function updateContactInfo(contactInfo: ContactInfo): Promise<Conta
 }
 
 // Styles Section
-export async function updateStyles(styles: Record<string, string>): Promise<boolean> {
+export async function updateStyles(
+  styles: Record<string, string>
+): Promise<boolean> {
   // Elimina eventuali proprietà id che potrebbero essere state passate
   const { id, ...styleValues } = styles;
-  
-  // Crea un array di operazioni di upsert per ogni coppia chiave-valore
-  const upsertPromises = Object.entries(styleValues).map(async ([key, value]) => {
-    const { error } = await supabase
-      .from("styles")
-      .upsert({
-        key,
-        value,
-        category: getCategoryForKey(key) // Funzione helper per determinare la categoria
-      }, {
-        onConflict: 'key' // In caso di conflitto sulla chiave, aggiorna il record esistente
-      });
 
-    if (error) {
-      console.error(`Error updating style ${key}:`, error);
-      throw error;
+  // Crea un array di operazioni di upsert per ogni coppia chiave-valore
+  const upsertPromises = Object.entries(styleValues).map(
+    async ([key, value]) => {
+      const { error } = await supabase.from("styles").upsert(
+        {
+          key,
+          value,
+          category: getCategoryForKey(key) // Funzione helper per determinare la categoria
+        },
+        {
+          onConflict: "key" // In caso di conflitto sulla chiave, aggiorna il record esistente
+        }
+      );
+
+      if (error) {
+        console.error(`Error updating style ${key}:`, error);
+        throw error;
+      }
+
+      return true;
     }
-    
-    return true;
-  });
+  );
 
   try {
     // Esegui tutte le operazioni di upsert
@@ -504,8 +514,8 @@ export async function updateStyles(styles: Record<string, string>): Promise<bool
 
 // Helper per determinare la categoria di uno stile in base alla chiave
 function getCategoryForKey(key: string): string {
-  if (key.includes('color')) return 'colors';
-  if (key.includes('font')) return 'typography';
-  if (key.includes('radius') || key.includes('shadow')) return 'layout';
-  return 'other';
+  if (key.includes("color")) return "colors";
+  if (key.includes("font")) return "typography";
+  if (key.includes("radius") || key.includes("shadow")) return "layout";
+  return "other";
 }

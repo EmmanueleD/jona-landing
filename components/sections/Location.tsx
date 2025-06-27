@@ -119,7 +119,7 @@ const Location = ({ data }: LocationProps) => {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Ubicación de Kinesiología Jona"
+                title="Ubicación de Quiropraxia Jona"
               ></iframe>
             </div>
           </div>

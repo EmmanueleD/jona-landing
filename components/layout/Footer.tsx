@@ -241,10 +241,10 @@ const Footer = ({ contactInfo }: FooterProps) => {
             className="text-sm mb-2"
             style={{ color: "var(--lightTextColor)" }}
           >
-            &copy; {currentYear} Kinesiología Jona. Todos los derechos
+            &copy; {currentYear} Quiropraxia Jona. Todos los derechos
             reservados.
           </p>
-          <div 
+          <div
             className="text-xs mb-2 flex justify-center space-x-4"
             style={{ color: "var(--lightTextColor)" }}
           >

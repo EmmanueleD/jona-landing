@@ -1,6 +1,6 @@
-# Estructura de Tablas en Supabase para Kinesiología Jona
+# Estructura de Tablas en Supabase para Quiropraxia Jona
 
-Este documento describe la estructura de tablas necesarias en Supabase para gestionar el contenido de la landing page de Kinesiología Jona.
+Este documento describe la estructura de tablas necesarias en Supabase para gestionar el contenido de la landing page de Quiropraxia Jona.
 
 ## Tablas
 

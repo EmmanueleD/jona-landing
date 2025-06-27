@@ -1,6 +1,6 @@
-# Kinesiología Jona - Documentación
+# Quiropraxia Jona - Documentación
 
-Esta es la documentación para la landing page de Kinesiología Jona, desarrollada con Next.js, Tailwind CSS y Supabase como CMS.
+Esta es la documentación para la landing page de Quiropraxia Jona, desarrollada con Next.js, Tailwind CSS y Supabase como CMS.
 
 ## Configuración de Variables de Entorno
 
@@ -45,7 +45,7 @@ El proyecto está estructurado de la siguiente manera:
 
 ### Acceso a Supabase
 
-1. Accede a [Supabase](https://app.supabase.io) y selecciona el proyecto "Kinesiología Jona"
+1. Accede a [Supabase](https://app.supabase.io) y selecciona el proyecto "Quiropraxia Jona"
 2. Ve a la sección "Table Editor" para editar el contenido de las tablas
 
 ### Edición de Contenido
@@ -53,6 +53,7 @@ El proyecto está estructurado de la siguiente manera:
 #### Hero (Sección Principal)
 
 En la tabla `hero`:
+
 - `title`: Título principal
 - `subtitle`: Subtítulo o descripción breve
 - `button_text`: Texto del botón de contacto
@@ -61,6 +62,7 @@ En la tabla `hero`:
 #### Sobre Mí
 
 En la tabla `about_me`:
+
 - `title`: Título de la sección
 - `content`: Contenido en formato HTML (puedes incluir etiquetas para formato)
 - `image_path`: Ruta de la imagen (subida a Storage)
@@ -68,6 +70,7 @@ En la tabla `about_me`:
 #### Servicios
 
 En la tabla `services`:
+
 - `title`: Nombre del servicio
 - `description`: Descripción del servicio
 - `icon_path`: Ruta del icono (opcional)
@@ -77,6 +80,7 @@ En la tabla `services`:
 #### Testimonios
 
 En la tabla `testimonials`:
+
 - `name`: Nombre de la persona
 - `quote`: Testimonio o frase
 - `image_path`: Ruta de la foto (subida a Storage)
@@ -84,6 +88,7 @@ En la tabla `testimonials`:
 #### Galería
 
 En la tabla `gallery`:
+
 - `title`: Título de la imagen (opcional)
 - `description`: Descripción de la imagen (opcional)
 - `image_path`: Ruta de la imagen (subida a Storage)
@@ -91,6 +96,7 @@ En la tabla `gallery`:
 #### Ubicación
 
 En la tabla `location`:
+
 - `address`: Dirección completa
 - `google_maps_url`: URL de Google Maps (embed)
 - `additional_info`: Información adicional (opcional)
@@ -98,6 +104,7 @@ En la tabla `location`:
 #### Información de Contacto
 
 En la tabla `contact_info`:
+
 - `email`: Correo electrónico
 - `phone`: Teléfono
 - `whatsapp`: Número de WhatsApp

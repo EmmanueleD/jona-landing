@@ -94,7 +94,7 @@ export default function AdminPage() {
           <div className="text-center mb-8">
             <FaLock className="mx-auto text-blue-500 text-4xl mb-4" />
             <h1 className="text-2xl font-bold">Panel de Administración</h1>
-            <p className="text-gray-600">Kinesiología Jona</p>
+            <p className="text-gray-600">Quiropraxia Jona</p>
           </div>
 
           {error && (

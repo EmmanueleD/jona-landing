@@ -1,5 +1,5 @@
 /**
- * Kinesiología Jona - Root Layout Component
+ * Quiropraxia Jona - Root Layout Component
  *
  * @author Emmanuele Durante <https://emmanueledurante.com>
  * @copyright 2025 Emmanuele Durante

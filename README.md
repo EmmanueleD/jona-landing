@@ -1,6 +1,6 @@
-# Kinesiología Jona - Complete Documentation
+# Quiropraxia Jona - Complete Documentation
 
-This documentation provides a comprehensive guide for implementing, configuring, and using the Kinesiología Jona website, a professional landing page for chiropractic services.
+This documentation provides a comprehensive guide for implementing, configuring, and using the Quiropraxia Jona website, a professional landing page for chiropractic services.
 
 **Author:** Emmanuele Durante ([emmanueledurante.com](https://emmanueledurante.com))  
 **Copyright:** © 2025 Emmanuele Durante
@@ -18,7 +18,7 @@ This documentation provides a comprehensive guide for implementing, configuring,
 
 ## Project Overview
 
-Kinesiología Jona is a professional website for a chiropractor, designed to showcase services, provide information about the professional, display client testimonials, and facilitate contact. The site includes:
+Quiropraxia Jona is a professional website for a chiropractor, designed to showcase services, provide information about the professional, display client testimonials, and facilitate contact. The site includes:
 
 - Responsive landing page with modern design
 - Configurable sections (Hero, About Me, Services, Testimonials, Gallery, Location)
@@ -29,6 +29,7 @@ Kinesiología Jona is a professional website for a chiropractor, designed to sho
 ## Technology Stack
 
 ### Frontend
+
 - **Next.js 14+**: React framework with server-side rendering
 - **React 19+**: UI library
 - **TypeScript**: Static typing
@@ -36,10 +37,12 @@ Kinesiología Jona is a professional website for a chiropractor, designed to sho
 - **React Icons**: SVG icons
 
 ### Backend
+
 - **Supabase**: PostgreSQL database, authentication, and storage
 - **API Routes**: Next.js serverless API
 
 ### Development Tools
+
 - **Node.js**: JavaScript runtime environment
 - **npm/yarn**: Package management
 - **Git**: Version control
@@ -47,6 +50,7 @@ Kinesiología Jona is a professional website for a chiropractor, designed to sho
 ## Development Environment Setup
 
 ### Prerequisites
+
 - Node.js (v18+)
 - npm or yarn
 - Supabase account
@@ -55,12 +59,14 @@ Kinesiología Jona is a professional website for a chiropractor, designed to sho
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/yourUsername/kinesiologia-jona.git
    cd kinesiologia-jona
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    # or
@@ -69,6 +75,7 @@ Kinesiología Jona is a professional website for a chiropractor, designed to sho
 
 3. **Configure environment variables**
    Create a `.env.local` file in the project root with the following variables:
+
    ```
    NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-public-key
@@ -93,6 +100,7 @@ Kinesiología Jona is a professional website for a chiropractor, designed to sho
 The database consists of the following tables:
 
 #### `hero` Table
+
 ```sql
 CREATE TABLE hero (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -107,6 +115,7 @@ CREATE TABLE hero (
 ```
 
 #### `about_me` Table
+
 ```sql
 CREATE TABLE about_me (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -119,6 +128,7 @@ CREATE TABLE about_me (
 ```
 
 #### `services` Table
+
 ```sql
 CREATE TABLE services (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -132,6 +142,7 @@ CREATE TABLE services (
 ```
 
 #### `testimonials` Table
+
 ```sql
 CREATE TABLE testimonials (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -146,6 +157,7 @@ CREATE TABLE testimonials (
 ```
 
 #### `gallery` Table
+
 ```sql
 CREATE TABLE gallery (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -158,6 +170,7 @@ CREATE TABLE gallery (
 ```
 
 #### `location` Table
+
 ```sql
 CREATE TABLE location (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -174,6 +187,7 @@ CREATE TABLE location (
 ```
 
 #### `contact_info` Table
+
 ```sql
 CREATE TABLE contact_info (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -190,6 +204,7 @@ CREATE TABLE contact_info (
 ```
 
 #### `styles` Table
+
 ```sql
 CREATE TABLE styles (
   key TEXT PRIMARY KEY,
@@ -199,7 +214,7 @@ CREATE TABLE styles (
 );
 
 -- Add columns for configurable logo
-ALTER TABLE styles 
+ALTER TABLE styles
 ADD COLUMN logo_type TEXT,
 ADD COLUMN logo_text TEXT,
 ADD COLUMN logo_image_url TEXT;
@@ -235,6 +250,7 @@ Repeat these policies for all other tables (`about_me`, `services`, `testimonial
 Create the following storage buckets for images:
 
 1. **`images` Bucket**
+
    - Used for general site images
    - Access policies: public for reading, authenticated for writing
 
@@ -312,10 +328,12 @@ kinesiologia-jona/
 ### Data Flow
 
 1. **Initialization**:
+
    - `app/layout.tsx` loads global styles
    - `app/page.tsx` calls `getAllLandingPageData()` to get all data
 
 2. **API**:
+
    - `lib/api.ts` contains functions to interact with Supabase
    - `getAllLandingPageData()` retrieves data from all tables
    - Specific functions for each section (e.g., `getHero()`, `getServices()`)
@@ -327,19 +345,25 @@ kinesiologia-jona/
 ### Main Components
 
 #### Navbar
+
 The `Navbar` component supports:
+
 - Configurable logo (text or image)
 - Transparent or background navigation
 - Responsive mobile menu
 
 #### Footer
+
 The `Footer` component includes:
+
 - Contact information
 - Social media links
 - Legal text in a modal dialog
 
 #### Sections
+
 Each landing page section is a separate component:
+
 - `Hero`: Main banner with CTA
 - `AboutMe`: Information about the professional
 - `Services`: List of offered services
@@ -350,44 +374,53 @@ Each landing page section is a separate component:
 ## Admin Panel
 
 ### Access
+
 The admin panel is accessible at the URL `/admin`. It requires authentication through Supabase.
 
 ### Features
 
 #### Hero Management
+
 - Edit title and subtitle
 - Upload background image
 - Configure CTA button text and URL
 
 #### About Me Management
+
 - Edit title and content
 - Upload professional's image
 
 #### Services Management
+
 - Add, edit, and delete services
 - Upload images for each service
 - Reorder services
 
 #### Testimonials Management
+
 - Add, edit, and delete testimonials
 - Upload client images
 - Set ratings
 - Reorder testimonials
 
 #### Gallery Management
+
 - Upload and organize images
 - Add alt text for accessibility
 
 #### Location Management
+
 - Configure address and contact details
 - Set map URL
 
 #### Contact Management
+
 - Configure email, phone, WhatsApp
 - Manage social media links
 - Edit legal text
 
 #### Styles Management
+
 - Customize primary, secondary, and accent colors
 - Configure fonts for text and headings
 - Manage logo (text or image)
@@ -398,6 +431,7 @@ The admin panel is accessible at the URL `/admin`. It requires authentication th
 The admin panel allows configuring the logo in two ways:
 
 1. **Text Logo**:
+
    - Select "Text" logo type
    - Enter desired text
    - Text color will be the configured primary color
@@ -413,10 +447,12 @@ The admin panel allows configuring the logo in two ways:
 ### Deploying to Vercel
 
 1. **Preparation**:
+
    - Ensure the repository is on GitHub, GitLab, or Bitbucket
    - Verify all environment variables are configured in the `.env.local` file
 
 2. **Deploy**:
+
    - Go to [vercel.com](https://vercel.com)
    - Import the repository
    - Configure environment variables:
@@ -434,7 +470,9 @@ The admin panel allows configuring the logo in two ways:
 ### Alternative Deployment
 
 #### Traditional Hosting
+
 1. Build the application:
+
    ```bash
    npm run build
    # or
@@ -446,7 +484,9 @@ The admin panel allows configuring the logo in two ways:
 ## Maintenance and Updates
 
 ### Updating Dependencies
+
 Periodically update the project dependencies:
+
 ```bash
 npm update
 # or
@@ -454,22 +494,26 @@ yarn upgrade
 ```
 
 ### Database Backup
+
 Regularly backup the Supabase database:
+
 1. Go to the Supabase dashboard
 2. Select your project
 3. Go to "Settings" > "Database"
 4. Click on "Backup"
 
 ### Monitoring
+
 Use Vercel's monitoring tools to check application performance and errors.
 
 ---
 
 ## Conclusion
 
-This documentation provides a comprehensive guide for implementing, configuring, and using the Kinesiología Jona website. By following these instructions, you can create and manage a professional website for chiropractic services with a complete admin panel.
+This documentation provides a comprehensive guide for implementing, configuring, and using the Quiropraxia Jona website. By following these instructions, you can create and manage a professional website for chiropractic services with a complete admin panel.
 
 For assistance or questions, contact the author:
+
 - **Emmanuele Durante**: [emmanueledurante.com](https://emmanueledurante.com)
 
 ---
