@@ -49,7 +49,7 @@ const Footer = ({ contactInfo }: FooterProps) => {
             </h3>
             <p className="mb-4" style={{ color: "var(--lightTextColor)" }}>
               Cuidando de tu salud y bienestar a través de tratamientos
-              kinesiológicos personalizados.
+              Quiropraticos personalizados.
             </p>
             <div className="flex space-x-4">
               {contactInfo?.instagram && (
