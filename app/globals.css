@@ -35,8 +35,23 @@
   --font-sans: var(--fontFamily);
 }
 
+/* Prevent FOUT (Flash of Unstyled Text) */
+html {
+  font-display: swap;
+}
+
 body {
   background: var(--backgroundColor);
   color: var(--textColor);
   font-family: var(--fontFamily);
+  /* Smooth font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Preload critical images - prevent layout shift */
+img {
+  max-width: 100%;
+  height: auto;
 }

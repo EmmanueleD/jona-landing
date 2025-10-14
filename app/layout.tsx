@@ -22,17 +22,53 @@ export const metadata: Metadata = {
     "quiropraxia, fisioterapia, rehabilitación, tratamiento, salud, bienestar"
 };
 
+// Map of font family CSS values to Google Fonts API names
+const fontNameMapping: Record<string, string> = {
+  "'Roboto', sans-serif": 'Roboto:wght@400;500;700',
+  "'Open Sans', sans-serif": 'Open+Sans:wght@400;600;700',
+  "'Lato', sans-serif": 'Lato:wght@400;700',
+  "'Montserrat', sans-serif": 'Montserrat:wght@400;500;700',
+  "'Poppins', sans-serif": 'Poppins:wght@400;500;600;700',
+  "'Raleway', sans-serif": 'Raleway:wght@400;500;600;700',
+  "'Playfair Display', serif": 'Playfair+Display:wght@400;500;600;700',
+  "'Merriweather', serif": 'Merriweather:wght@400;700',
+};
+
 export default async function RootLayout({
   children
 }: {
   children: React.ReactNode;
 }) {
   const styles = await getStyles();
+  
+  // Prepare fonts to preload
+  const fontsToLoad = new Set<string>();
+  if (styles?.font_family && fontNameMapping[styles.font_family]) {
+    fontsToLoad.add(fontNameMapping[styles.font_family]);
+  }
+  if (styles?.heading_font && styles.heading_font !== styles.font_family && fontNameMapping[styles.heading_font]) {
+    fontsToLoad.add(fontNameMapping[styles.heading_font]);
+  }
+  
+  const fontUrl = fontsToLoad.size > 0 
+    ? `https://fonts.googleapis.com/css2?${Array.from(fontsToLoad).map(font => `family=${font}`).join('&')}&display=swap`
+    : null;
+  
   return (
     <html lang="es" className="scroll-smooth" suppressHydrationWarning>
       <head>
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
+        
+        {/* Preload fonts to prevent FOUT */}
+        {fontUrl && (
+          <>
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+            <link rel="stylesheet" href={fontUrl} />
+          </>
+        )}
+        
         {/* Agregar estilos para react-slick */}
         <link
           rel="stylesheet"
