@@ -35,23 +35,24 @@
   --font-sans: var(--fontFamily);
 }
 
+body {
+  background: var(--backgroundColor);
+  color: var(--textColor);
+  font-family: var(--fontFamily);
+}
+
 /* Prevent FOUT (Flash of Unstyled Text) */
 html {
   font-display: swap;
 }
 
-body {
-  background: var(--backgroundColor);
-  color: var(--textColor);
-  font-family: var(--fontFamily);
-  /* Smooth font rendering */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+/* Smooth image loading */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
-/* Preload critical images - prevent layout shift */
-img {
-  max-width: 100%;
-  height: auto;
+/* Prevent layout shift during image loading */
+img[loading="lazy"] {
+  min-height: 200px;
 }

@@ -106,6 +106,7 @@ const Navbar = ({
                 alt="Logo"
                 width={200}
                 height={50}
+                priority
                 className="max-h-14 w-auto object-contain"
               />
             )

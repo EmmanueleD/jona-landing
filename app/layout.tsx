@@ -10,7 +10,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import StyleProvider from "@/components/StyleProvider";
 import { getStyles } from "@/lib/api";
-import FontLoader from "@/components/FontLoader";
+import LoadingScreen from "@/components/LoadingScreen";
 
 // Ya no necesitamos la instancia de Inter
 
@@ -22,17 +22,35 @@ export const metadata: Metadata = {
     "quiropraxia, fisioterapia, rehabilitación, tratamiento, salud, bienestar"
 };
 
-// Map of font family CSS values to Google Fonts API names
-const fontNameMapping: Record<string, string> = {
-  "'Roboto', sans-serif": 'Roboto:wght@400;500;700',
-  "'Open Sans', sans-serif": 'Open+Sans:wght@400;600;700',
-  "'Lato', sans-serif": 'Lato:wght@400;700',
-  "'Montserrat', sans-serif": 'Montserrat:wght@400;500;700',
-  "'Poppins', sans-serif": 'Poppins:wght@400;500;600;700',
-  "'Raleway', sans-serif": 'Raleway:wght@400;500;600;700',
-  "'Playfair Display', serif": 'Playfair+Display:wght@400;500;600;700',
-  "'Merriweather', serif": 'Merriweather:wght@400;700',
-};
+// Helper function to get Google Fonts URL
+function getFontsUrl(fontFamily?: string, headingFont?: string): string | null {
+  const fontNameMapping: Record<string, string> = {
+    "'Roboto', sans-serif": 'Roboto:wght@400;500;700',
+    "'Open Sans', sans-serif": 'Open+Sans:wght@400;600;700',
+    "'Lato', sans-serif": 'Lato:wght@400;700',
+    "'Montserrat', sans-serif": 'Montserrat:wght@400;500;700',
+    "'Poppins', sans-serif": 'Poppins:wght@400;500;600;700',
+    "'Raleway', sans-serif": 'Raleway:wght@400;500;600;700',
+    "'Playfair Display', serif": 'Playfair+Display:wght@400;500;600;700',
+    "'Merriweather', serif": 'Merriweather:wght@400;700',
+  };
+
+  const fontsToLoad = new Set<string>();
+  
+  if (fontFamily && fontNameMapping[fontFamily]) {
+    fontsToLoad.add(fontNameMapping[fontFamily]);
+  }
+  
+  if (headingFont && headingFont !== fontFamily && fontNameMapping[headingFont]) {
+    fontsToLoad.add(fontNameMapping[headingFont]);
+  }
+  
+  if (fontsToLoad.size > 0) {
+    return `https://fonts.googleapis.com/css2?${Array.from(fontsToLoad).map(font => `family=${font}`).join('&')}&display=swap`;
+  }
+  
+  return null;
+}
 
 export default async function RootLayout({
   children
@@ -40,19 +58,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const styles = await getStyles();
-  
-  // Prepare fonts to preload
-  const fontsToLoad = new Set<string>();
-  if (styles?.font_family && fontNameMapping[styles.font_family]) {
-    fontsToLoad.add(fontNameMapping[styles.font_family]);
-  }
-  if (styles?.heading_font && styles.heading_font !== styles.font_family && fontNameMapping[styles.heading_font]) {
-    fontsToLoad.add(fontNameMapping[styles.heading_font]);
-  }
-  
-  const fontUrl = fontsToLoad.size > 0 
-    ? `https://fonts.googleapis.com/css2?${Array.from(fontsToLoad).map(font => `family=${font}`).join('&')}&display=swap`
-    : null;
+  const fontsUrl = getFontsUrl(styles?.font_family, styles?.heading_font);
   
   return (
     <html lang="es" className="scroll-smooth" suppressHydrationWarning>
@@ -60,13 +66,13 @@ export default async function RootLayout({
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
         
+        {/* Preconnect to Google Fonts for faster loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
         {/* Preload fonts to prevent FOUT */}
-        {fontUrl && (
-          <>
-            <link rel="preconnect" href="https://fonts.googleapis.com" />
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-            <link rel="stylesheet" href={fontUrl} />
-          </>
+        {fontsUrl && (
+          <link rel="stylesheet" href={fontsUrl} />
         )}
         
         {/* Agregar estilos para react-slick */}
@@ -83,10 +89,7 @@ export default async function RootLayout({
       </head>
       <body className="antialiased" suppressHydrationWarning>
         <StyleProvider styles={styles}>
-          <FontLoader
-            fontFamily={styles?.font_family}
-            headingFont={styles?.heading_font}
-          />
+          <LoadingScreen />
           {children}
         </StyleProvider>
       </body>
